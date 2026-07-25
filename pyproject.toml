@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "auto-park"
+version = "0.1.0"
+description = "Schedule a next-day parking payment via Telegram + Playwright."
+readme = "README.md"
+# Capped below 3.14: python-telegram-bot 21.6 relies on asyncio.get_event_loop()
+# in the main thread, which raises RuntimeError on 3.14 (it only warned before).
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "python-telegram-bot[job-queue]==21.6",
+    "playwright==1.61.0",
+    "python-dotenv==1.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+    "ruff==0.8.4",
+]
+
+[project.scripts]
+auto-park = "autopark.scheduler:main"
+auto-park-pay = "autopark.pay:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
