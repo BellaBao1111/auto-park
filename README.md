@@ -48,7 +48,7 @@ Install [uv](https://docs.astral.sh/uv/) once (`brew install uv` or
 `curl -LsSf https://astral.sh/uv/install.sh | sh`), then:
 
 ```bash
-cd /Users/bellabao/Desktop/auto-park
+cd auto-park
 make setup
 ```
 
@@ -96,7 +96,7 @@ does **not** echo your chat_id.)
 ### 5. Dry-run the payment flow manually (do this before anything else)
 
 ```bash
-cd /Users/bellabao/Desktop/auto-park
+cd auto-park
 HEADLESS=false make pay ARGS="--zone 408 --space 503 --duration 60"
 ```
 
